@@ -39,6 +39,6 @@ class CNN_network(nn.Module):
         out = self.layer2(out)
         # print(out.size())  # torch.Size([4, 16, 8, 8])
         out = out.reshape(out.size(0), -1)
-        # print(out.size())  # torch.Size([4, 1024])
+        # print(out.size())  # torch.Size([4, 28*28])
         out = self.fc(out)
         return out

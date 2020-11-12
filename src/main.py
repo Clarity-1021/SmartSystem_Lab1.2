@@ -1,10 +1,8 @@
-import CNN_network
+from src import CNN_network
+from src import load_data
 import torch
-import torchvision
-import torchvision.transforms as transforms
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
@@ -12,30 +10,10 @@ import matplotlib.pyplot as plt
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-my_transforms = transforms.Compose([transforms.Grayscale(),  # 转灰度图
-                                    # transforms.Resize((32, 32)),  # 重置图像分辨
-                                    # transforms.CenterCrop(32),  # 进行中心剪裁
-                                    transforms.ToTensor()])  # 转为Tensor
-
-# train_size = "600"  # 每个文字分类取的训练集的个数
-train_size = "500"
-
-# train_set_prams
-train_set_path = r"./data/" + train_size + "/train"  # 训练集样本的文件夹
-train_batch_size = 4  # 训练集的batch_size
-
-# develop_set_prams
-develop_set_path = r"./data/" + train_size + "/develop"  # 开发集样本的文件夹
-develop_batch_size = 20  # 开发集的batch_size
-
-# test_set_prams
-test_set_path = develop_set_path  # 测试集样本的文件夹
-test_batch_size = 20  # 测试集的batch_size
-
 # network_save
 lab_index = '1'  # 实验编号
-net_save_path = 'test/' + lab_index + '/jxw_cnn_net.pkl'  # 训练好的卷积网络存储的地址
-params_save_path = 'test/' + lab_index + '/jxw_cnn_net_params.pkl'  # 训练好的卷积网络的参数存储的地址
+net_save_path = '../lab_result/' + lab_index + '/jxw_cnn_net.pkl'  # 训练好的卷积网络存储的地址
+params_save_path = '../lab_result/' + lab_index + '/jxw_cnn_net_params.pkl'  # 训练好的卷积网络的参数存储的地址
 
 # 超参数
 epoch_count = 20  # 指定的最大epoch数
@@ -49,31 +27,13 @@ def my_optimizer(net):
     return optim.SGD(net.parameters(), lr=my_learning_rate, momentum=my_moment)
 
 
-def load_train_set():
-    train_set = torchvision.datasets.ImageFolder(train_set_path, transform=my_transforms)
-    train_loader = torch.utils.data.DataLoader(train_set, batch_size=train_batch_size, shuffle=True)
-    return train_loader, len(train_set.samples)
-
-
-def load_develop_set():
-    develop_set = torchvision.datasets.ImageFolder(develop_set_path, transform=my_transforms)
-    develop_loader = torch.utils.data.DataLoader(develop_set, batch_size=develop_batch_size, shuffle=False)
-    return develop_loader, len(develop_set.samples)
-
-
-def load_test_set():
-    test_set = torchvision.datasets.ImageFolder(test_set_path, transform=my_transforms)
-    test_loader = torch.utils.data.DataLoader(test_set, batch_size=test_batch_size, shuffle=False)
-    return test_loader, len(test_set.samples)
-
-
 # train
 def train_save_net():
     net = CNN_network.CNN_network()
     optimizer = my_optimizer(net)
     criterion = my_criterion
-    train_loader, train_sample_size = load_train_set()  # load train set
-    develop_loader, develop_sample_size = load_develop_set()  # load develop set
+    train_loader, train_sample_size, train_batch_size = load_data.load_train_set()  # load train set
+    develop_loader, develop_sample_size, develop_batch_size = load_data.load_develop_set()  # load develop set
 
     print('---Data_got---')
     print('---CNN_NET_Train_Start---')
@@ -93,18 +53,19 @@ def train_save_net():
                 p_outputs = net(inputs)  # forward，正向传播
                 loss = criterion(p_outputs, labels)  # 得到loss
                 loss.backward()  # backward，向使得loss减小的梯度下降的方向调整权重，反向传播
-                optimizer.step()  # optimizer，很像权重参数
+                optimizer.step()  # optimizer，更新权重参数
                 train_loss += loss.item()  # 累加loss
                 # 更新经过这个batch后的到现在为止训练集中正确个数
-                train_right_count = update_right_count_by_batch(train_right_count, labels, p_outputs)
+                train_right_count += torch.eq(torch.max(p_outputs.data, 1).indices, labels).sum().item()
+                # train_right_count = update_right_count_by_batch(train_right_count, labels, p_outputs)
 
             # 测试用当前网络预测开发集中的数据的loss和正确个数
             develop_loss, develop_right_count = test_loss_and_right_count(net, develop_loader, criterion)
 
             # 计算loss和正确率
-            train_loss = train_loss / train_sample_size
+            train_loss = train_loss / len(train_loader)
             train_right_rate = train_right_count / train_sample_size
-            develop_loss = develop_loss / develop_sample_size
+            develop_loss = develop_loss / len(develop_loader)
             develop_right_rate = develop_right_count / develop_sample_size
 
             # 存loss和正确率
@@ -153,13 +114,13 @@ def test_loss_and_right_count(net, data_loader, criterion):
     return test_loss, right_count
 
 
-# test
-def test():
+# lab_result
+def lab_result():
     print('---Test_Start---')
 
     # 加载网络和测试集
     trained_net = torch.load(net_save_path)  # load net
-    test_loader, test_sample_size = load_test_set()  # load test set
+    test_loader, test_sample_size, test_batch_size = load_data.load_test_set()  # load lab_result set
 
     # 测试用当前网络预测测试集中的数据的loss和正确个数
     test_loss, test_right_count = test_loss_and_right_count(trained_net, test_loader,
@@ -171,7 +132,7 @@ def test():
     test_right_rate = test_right_count / test_sample_size
 
     # 打印结果
-    print('test loss=%.5f,\t test right rate=%.3f%%' %
+    print('lab_result loss=%.5f,\t lab_result right rate=%.3f%%' %
           (test_loss, test_right_rate * 100))
 
 
@@ -200,4 +161,4 @@ t_ls, t_r_rs, d_ls, d_r_rs = train_save_net()
 draw_loss_compare(t_ls, d_ls)
 draw_right_rate_compare(t_r_rs, d_r_rs)
 
-# test()
+# lab_result()
