@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
 print('---CNN_NET_Train_Finished---')
 
-plt.figure(1)
+plt.figure('train loss')
 for i, train_losses in enumerate(train_losses_cps):
     plt.plot(train_losses, label=lals[i])
 plt.legend(loc='best')
@@ -119,7 +119,7 @@ plt.xlabel('epoch')
 plt.ylabel('loss')
 plt.show()
 
-plt.figure(2)
+plt.figure('train right rate')
 for i, train_right_rates in enumerate(train_right_rates_cps):
     plt.plot(train_right_rates, label=lals[i])
 plt.legend(loc='best')
@@ -127,7 +127,7 @@ plt.xlabel('epoch')
 plt.ylabel('right rate')
 plt.show()
 
-plt.figure(3)
+plt.figure('develop loss')
 for i, develop_losses in enumerate(develop_losses_cps):
     plt.plot(develop_losses, label=lals[i])
 plt.legend(loc='best')
@@ -135,7 +135,7 @@ plt.xlabel('epoch')
 plt.ylabel('loss')
 plt.show()
 
-plt.figure(4)
+plt.figure('develop right rate')
 for i, develop_right_rates in enumerate(develop_right_rates_cps):
     plt.plot(develop_right_rates, label=lals[i])
 plt.legend(loc='best')

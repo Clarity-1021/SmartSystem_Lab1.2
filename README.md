@@ -79,7 +79,11 @@ torchvision.datasets.ImageFolder
 
 对比了八种常用的优化函数：`SGD`、`SGD+Momentum`、`SGD+Momentum+Nesterov`、`Adagrad`、`Adadelta`、`RMSprop`、`Adam`、`Adamax`
 
-其中`SGD+Momentum`、`SGD+Momentum+Nesterov`是`SGD`的改善版，`Adadelta`、`RMSprop`、`Adam`是`Adagrad`的改善版，`Adamax`是`Adam`的改善版。
+其中`SGD+Momentum`、`SGD+Momentum+Nesterov`是`SGD`的改善版，
+
+`Adadelta`、`RMSprop`、`Adam`是`Adagrad`的改善版，
+
+`Adamax`是`Adam`的改善版。
 
 `Adamax`比`Adam`增加了一个学习上线的概念。
 
@@ -99,17 +103,67 @@ torchvision.datasets.ImageFolder
 
 在开发集上，对于正确率和loss都表现最好的是`Adamax`。
 
-### 2.3 正则化
+### 2.3 batch_size 和 learning rate
+
+<center>
+    <img src = "./imgs/AdamMax_batchsize=5/develop loss.png"  width = "48%"/>
+    <img src="./imgs/AdamMax_batchsize=5/develop right rate.png" width = "48%"/>
+</center>
+<center><strong>图 3 - batchsize=5时开发集相关数据</strong></center>
+
+<center>
+    <img src = "./imgs/AdamMax_batchsize=2/develop loss.png"  width = "48%"/>
+    <img src="./imgs/AdamMax_batchsize=2/develop right rate.png" width = "48%"/>
+</center>
+<center><strong>图 4 - batchsize=2时开发集相关数据</strong></center>
+
+<center>
+    <img src = "./imgs/AdamMax_batchsize=1/develop loss.png"  width = "48%"/>
+    <img src="./imgs/AdamMax_batchsize=1/develop right rate.png" width = "48%"/>
+</center>
+<center><strong>图 5 - batchsize=1时开发集相关数据</strong></center>
+
+#### 结论
+
+batch_size=1，learning_rate=0.01时最佳。在第6个epoch和第10个epoch时峰值达到过99.167%。
+
+### 2.4 正则化
+
+因为我本来就是正则化处理过的，这个对比一下去掉正则化的情况。由于我的网络是有两个隐藏层的，我对比只对第一层正则化，只对第二次正则化和不正则化的网络各是什么效果。
+
+<center>
+    <img src = "./imgs/正则化对比实验/develop loss.png"  width = "48%"/>
+    <img src="./imgs/正则化对比实验/develop right rate.png" width = "48%"/>
+</center>
+<center><strong>图 6 - 正则化对比实验</strong></center>
+
+可以看到没有完全经过正则化的红线，不仅在最开始的几次迭代中，显著的表现很差之外，loss过早的从底部反弹，趋势不再收敛。
+
+而只有一层隐藏层正则化的网络，只有第一层正则化的网络表现比只有最后一层隐藏层正则化的网络效果要来的差。
+
+#### 结论
+
+每一层隐藏层都正则化，网络效果最好。
+
+### 2.5 图片处理
+
+<center>
+    <img src = "./imgs/重置图片像素/develop loss.png"  width = "48%"/>
+    <img src="./imgs/重置图片像素/develop right rate.png" width = "48%"/>
+</center>
+<center><strong>图 6 - 正则化对比实验</strong></center>
+
+### 2.6 网络结构
 
 
-
-### 2.4 图片处理
-
-### 2.5 网络结构
 
 ## 3 对网络设计的理解
 
+卷积神经网络，简单来说就是要顺序执行卷积，激活，池化，最后将最后一层隐藏层提取的特征，线性变换得到最后的分类输出。
 
+隐藏层的层数，各层的神经元个数，卷积的窗口大小，移动的步长，池化的窗口大小，移动的步长，以及是否进行正则化都会对网络的实际效果产生影响。
+
+要想设计出好的网络，网络的学习率，batch_size，以及以上的各个因素都要综合考虑。
 
 
 
@@ -123,7 +177,11 @@ torchvision.datasets.ImageFolder
 
 ### 
 
-7种优化函数
+
+
+#### 参考博文
+
+6种优化函数
 
 https://blog.csdn.net/qq_36589234/article/details/89330342
 

@@ -89,13 +89,13 @@ if __name__ == '__main__':
                 optimizer.step()
                 tr_l[0] += loss.item()
                 tr_r[0] += torch.eq(torch.max(p_outputs.data, 1).indices, labels).sum().item()
-            if batch_index % 600 == 599:
+            if batch_index % 2400 == 2399:
                 print('epoch[%2d/%2d] batch[%4d/%4d]' % (epoch + 1, epoch_count, batch_index + 1, len(train_loader)))
                 print('---train_set---')
                 for optm, tr_l, tr_r, train_losses, train_right_rates in zip(
                         lals, train_loss, train_right_count, train_losses_cps, train_right_rates_cps):
-                    tr_ll = tr_l[0] / 600
-                    tr_rr = tr_r[0] / (600 * train_batch_size)
+                    tr_ll = tr_l[0] / 2400
+                    tr_rr = tr_r[0] / (2400 * train_batch_size)
                     train_losses.append(tr_ll)
                     train_right_rates.append(tr_rr)
                     print('[' + optm + '] train loss=%.5f,\t train right rate=%.3f%%' %
