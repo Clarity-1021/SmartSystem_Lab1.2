@@ -14,7 +14,7 @@ train_size = "600"  # 每个文字分类取的训练集的个数
 
 # train_set_prams
 train_set_path = r"../data/" + train_size + "/train"  # 训练集样本的文件夹
-train_batch_size = 4  # 训练集的batch_size
+train_batch_size = 5  # 训练集的batch_size
 
 # develop_set_prams
 develop_set_path = r"../data/" + train_size + "/develop"  # 开发集样本的文件夹

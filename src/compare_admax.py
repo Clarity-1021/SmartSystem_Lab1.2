@@ -22,27 +22,22 @@ def my_optimizer(net):
 
 
 # train
-lals = ['SGD', 'SGD+Momentum', 'SGD+Momentum+Nesterov', 'Adagrad', 'Adadelta', 'RMSprop', 'Adam', 'Adamax']
+lals = ['Adamax_0.001', 'Adamax_0.002', 'Adamax_0.003', 'Adamax_0.005', 'Adamax_0.01']
 # 用相同的optimiser训练网络，配合不同的损失函数
-net_SGD = CNN_network.CNN_network()
-net_SGD_M = CNN_network.CNN_network()
-net_SGD_M_N = CNN_network.CNN_network()
-net_Adagrad = CNN_network.CNN_network()
-net_Adadelta = CNN_network.CNN_network()
-net_RMSprop = CNN_network.CNN_network()
-net_Adam = CNN_network.CNN_network()
-net_Adamax = CNN_network.CNN_network()
-nets = [net_SGD, net_SGD_M, net_SGD_M_N, net_Adagrad, net_Adadelta, net_RMSprop, net_Adam, net_Adamax]
 
-opt_SGD = optim.SGD(net_SGD.parameters(),lr=my_learning_rate)
-opt_SGD_M = optim.SGD(net_SGD_M.parameters(),lr=my_learning_rate,momentum=my_moment,nesterov=False)
-opt_SGD_M_N = optim.SGD(net_SGD_M_N.parameters(),lr=my_learning_rate,momentum=my_moment,nesterov=True)
-opt_Adagrad = optim.Adagrad(net_Adagrad.parameters(),lr=my_learning_rate)
-opt_Adadelta = optim.Adadelta(net_Adadelta.parameters(),lr=1.0,rho=0.9,eps=1e-06,weight_decay=0)
-opt_RMSprop = torch.optim.RMSprop(net_RMSprop.parameters(),lr=my_learning_rate,alpha=0.9)
-opt_Adam = optim.Adam(net_Adam.parameters(),lr=my_learning_rate,betas=(0.9,0.99))
-opt_Adamax = optim.Adamax(net_Adamax.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
-opts = [opt_SGD, opt_SGD_M, opt_SGD_M_N, opt_Adagrad, opt_Adadelta, opt_RMSprop, opt_Adam, opt_Adamax]
+net_Adamax_1 = CNN_network.CNN_network()
+net_Adamax_2 = CNN_network.CNN_network()
+net_Adamax_3 = CNN_network.CNN_network()
+net_Adamax_4 = CNN_network.CNN_network()
+net_Adamax_5 = CNN_network.CNN_network()
+nets = [net_Adamax_1, net_Adamax_2, net_Adamax_3, net_Adamax_4, net_Adamax_5]
+
+opt_Adamax_1 = optim.Adamax(net_Adamax_1.parameters(),lr=0.001,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_Adamax_2 = optim.Adamax(net_Adamax_2.parameters(),lr=0.002,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_Adamax_3 = optim.Adamax(net_Adamax_3.parameters(),lr=0.003,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_Adamax_4 = optim.Adamax(net_Adamax_4.parameters(),lr=0.005,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_Adamax_5 = optim.Adamax(net_Adamax_5.parameters(),lr=0.01,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opts = [opt_Adamax_1, opt_Adamax_2, opt_Adamax_3, opt_Adamax_4, opt_Adamax_5]
 
 criterion = nn.CrossEntropyLoss()
 
@@ -52,14 +47,14 @@ develop_loader, develop_sample_size, develop_batch_size = load_data.load_develop
 print('---Data_got---')
 print('---CNN_NET_Train_Start---')
 
-train_losses_cps = [[], [], [], [], [], [], [], []]  # 训练集的loss
-train_right_rates_cps = [[], [], [], [], [], [], [], []]  # 正确率
-develop_losses_cps = [[], [], [], [], [], [], [], []]  # 训练集的loss
-develop_right_rates_cps = [[], [], [], [], [], [], [], []]
+train_losses_cps = [[], [], [], [], []]  # 训练集的loss
+train_right_rates_cps = [[], [], [], [], []]  # 正确率
+develop_losses_cps = [[], [], [], [], []]  # 训练集的loss
+develop_right_rates_cps = [[], [], [], [], []]
 
 def test_loss_and_right_rate():
-    test_loss = [[0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
-    test_right_count = [[0], [0], [0], [0], [0], [0], [0], [0]]  # 总正确个数
+    test_loss = [[0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
+    test_right_count = [[0], [0], [0], [0], [0]]  # 总正确个数
     for data in develop_loader:
         inputs, labels = data
         for net, tr_l, tr_r in zip(nets, test_loss, test_right_count):
@@ -81,8 +76,8 @@ def test_loss_and_right_rate():
 
 if __name__ == '__main__':
     for epoch in range(epoch_count):
-        train_loss = [[0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0]]  # 训练集总loss
-        train_right_count = [[0], [0], [0], [0], [0], [0], [0], [0]]  # 训练集总正确个数
+        train_loss = [[0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
+        train_right_count = [[0], [0], [0], [0], [0]]  # 总正确个数
         for batch_index, data in enumerate(train_loader):
             inputs, labels = data
             for net, optimizer, tr_l, tr_r in zip(
@@ -105,8 +100,8 @@ if __name__ == '__main__':
                     train_right_rates.append(tr_rr)
                     print('[' + optm + '] train loss=%.5f,\t train right rate=%.3f%%' %
                           (tr_ll, tr_rr * 100))
-                train_loss = [[0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0], [0.0]]  # 训练集总loss
-                train_right_count = [[0], [0], [0], [0], [0], [0], [0], [0]]  # 训练集总正确个数
+                train_loss = [[0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
+                train_right_count = [[0], [0], [0], [0], [0]]  # 总正确个数
                 test_loss_and_right_rate()
 
 print('---CNN_NET_Train_Finished---')

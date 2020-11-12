@@ -57,25 +57,71 @@ torchvision.datasets.ImageFolder
 
 ## 2 设计实验改进网络并论证
 
-优化技巧
-
-https://www.cnblogs.com/wj-1314/p/9838866.html
-
-`batchnormalization`
-
-https://blog.csdn.net/bigFatCat_Tom/article/details/91619977
-
 ### 2.1 损失函数
 
-![loss](D:\Wendy\学习\人工智能\Labs\Lab1.2\SmartSystem_Lab1.2\imgs\不同损失函数的对比实验\loss.png)
+对比了三种常用的损失函数：`MSELoss`、`L1Loss`、`CrossEntropyLoss`。
 
-![right rate](D:\Wendy\学习\人工智能\Labs\Lab1.2\SmartSystem_Lab1.2\imgs\不同损失函数的对比实验\right rate.png)
+其中`MSELoss`和`L1Loss`都是以`one-hot`的输出来计算损失的，而交叉熵是的每一个分类的输出是该分类的概率。
 
-#### 
+<center>
+    <img src="./imgs/不同损失函数的对比实验/loss.png" width = "48%"/>
+    <img src = "./imgs/不同损失函数的对比实验/right rate.png"  width = "48%"/>
+</center>
+<center><strong>图 1 - 不同损失函数效果对比</strong></center>
 
+可以看出，交叉熵的效果最好，loss收敛的速度最快，分类正确率也远高于另外两个。
 
+#### 结论
+
+交叉熵明显优于其他。
 
 ### 2.2 优化函数
+
+对比了八种常用的优化函数：`SGD`、`SGD+Momentum`、`SGD+Momentum+Nesterov`、`Adagrad`、`Adadelta`、`RMSprop`、`Adam`、`Adamax`
+
+其中`SGD+Momentum`、`SGD+Momentum+Nesterov`是`SGD`的改善版，`Adadelta`、`RMSprop`、`Adam`是`Adagrad`的改善版，`Adamax`是`Adam`的改善版。
+
+`Adamax`比`Adam`增加了一个学习上线的概念。
+
+<center>
+    <img src="./imgs/不同优化函数的对比实验/train loss.png" width = "48%"/>
+    <img src = "./imgs/不同优化函数的对比实验/develop loss.png"  width = "48%"/>
+    <img src="./imgs/不同优化函数的对比实验/train right rate.png" width = "48%"/>
+    <img src = "./imgs/不同优化函数的对比实验/develop right rate.png"  width = "48%"/>
+</center>
+<center><strong>图 2 - 不同优化函数效果对比(左-训练集、右-开发集)</strong></center>
+
+两个较为基础的优化函数`SGD`和`Adagrad`效果显著差于其他更加完善的版本。
+
+虽然`Adam`在训练集上的表现很好，但是在开发集上，经过多次迭代之后，loss竟然有明显的上升的趋势。
+
+#### 结论
+
+在开发集上，对于正确率和loss都表现最好的是`Adamax`。
+
+### 2.3 正则化
+
+
+
+### 2.4 图片处理
+
+### 2.5 网络结构
+
+## 3 对网络设计的理解
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 
 
 7种优化函数
 
@@ -84,76 +130,3 @@ https://blog.csdn.net/qq_36589234/article/details/89330342
 10种优化函数
 
 https://blog.csdn.net/u011995719/article/details/88988420?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight
-
-#### 2.2.1 `SGD(stochastic gradient descent)`
-
-```python
-torch.optim.SGD(params, lr=<required parameter>, momentum=0, dampening=0, weight_decay=0, nesterov=False)
-```
-
-参数：
-
-- params (iterable)：iterable of parameters to optimize or dicts defining parameter groups
-- lr (float)：learning rate
-- momentum (float, optional)：momentum factor (default: 0)
-- weight_decay (float, optional)：weight decay (L2 penalty) (default: 0)即L2regularization，选择一个合适的权重衰减系数λ非常重要，这个需要根据具体的情况去尝试，初步尝试可以使用 `1e-4` 或者 `1e-3`
-- dampening (float, optional)：dampening for momentum (default: 0)
-- nesterov (bool, optional)：enables Nesterov momentum (default: False)
-
-##### 2.2.1.1 `Momentum`
-
-通过交叉验证，这个参数通常设为[0.5,0.9,0.95,0.99]中的一个，一般为0.9。
-
-##### 2.2.1.2 `Nesterov Momentum`
-
-设置momentum同时设置`nesterov`
-
-```python
-nesterov=True
-```
-
-#### 2.2.2 `AdaGrad(Pre-parameter adaptive learning rate methods)`
-
-```python
-torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial_accumulator_value=0)
-```
-
-##### 参数：
-
-- params (iterable) – iterable of parameters to optimize or dicts defining parameter groups
-- lr (float, optional) – learning rate (default: 1e-2)
-- lr_decay (float, optional) – learning rate decay (default: 0)
-- weight_decay (float, optional) – weight decay (L2 penalty) (default: 0)
-
-#### 2.2.3 `RMSProp(AdaGrad的梯度平方滑动平均版)`
-
-```python
-torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e-08, weight_decay=0, momentum=0, centered=False)
-```
-
-参数：
-
-- params (iterable) – iterable of parameters to optimize or dicts defining parameter groups
-- lr (float, optional) – learning rate (default: 1e-2)
-- momentum (float, optional) – momentum factor (default: 0)
-- alpha (float, optional) – smoothing constant (default: 0.99)
-- eps (float, optional) – term added to the denominator to improve numerical stability (default: 1e-8)
-- centered (bool, optional) – if True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance
-- weight_decay (float, optional) – weight decay (L2 penalty) (default: 0)
-
-#### 2.2.4 `Adam(RMSProp的Momentum版)`
-
-```python
-torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0, amsgrad=False)
-```
-
-参数：
-
-- params (iterable) – iterable of parameters to optimize or dicts defining parameter groups
-- lr (float, optional) – learning rate (default: 1e-3)
-- betas (Tuple[float, float], optional) – coefficients used for computing running averages of gradient and its square (default: (0.9, 0.999))
-- eps (float, optional) – term added to the denominator to improve numerical stability (default: 1e-8)
-- weight_decay (float, optional) – weight decay (L2 penalty) (default: 0)
-- amsgrad (boolean, optional) – whether to use the AMSGrad variant of this algorithm from the paper On the Convergence of Adam and Beyond (default: False)
-
-## 3 对网络设计的理解
