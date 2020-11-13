@@ -1,7 +1,7 @@
 from src import CNN_network
-from src import net_32
+from src import net_28
 from src import load_data
-from src import load_data_32
+from src import load_data_28
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -20,8 +20,8 @@ my_learning_rate = 0.01  # 学习率
 lals = ['28x28', '32x32']
 # 用相同的optimiser训练网络，配合不同的损失函数
 
-net_28 = CNN_network.CNN_network()
-net_32 = net_32.CNN_network()
+net_28 = net_28.CNN_network()
+net_32 = CNN_network.CNN_network()
 # nets = [net_28, net_32]
 
 opt_28 = optim.Adamax(net_28.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
@@ -30,10 +30,10 @@ opt_32 = optim.Adamax(net_32.parameters(),lr=my_learning_rate,betas=(0.9, 0.999)
 
 criterion = nn.CrossEntropyLoss()
 
-train_loader_28, train_sample_size_28, train_batch_size_28 = load_data.load_train_set()  # load train set
-develop_loader_28, develop_sample_size_28, develop_batch_size_28 = load_data.load_develop_set()  # load develop set
-train_loader_32, train_sample_size_32, train_batch_size_32 = load_data_32.load_train_set()  # load train set
-develop_loader_32, develop_sample_size_32, develop_batch_size_32 = load_data_32.load_develop_set()  # load develop set
+train_loader_28, train_sample_size_28, train_batch_size_28 = load_data_28.load_train_set()  # load train set
+develop_loader_28, develop_sample_size_28, develop_batch_size_28 = load_data_28.load_develop_set()  # load develop set
+train_loader_32, train_sample_size_32, train_batch_size_32 = load_data.load_train_set()  # load train set
+develop_loader_32, develop_sample_size_32, develop_batch_size_32 = load_data.load_develop_set()  # load develop set
 
 print('---Data_got---')
 print('---CNN_NET_Train_Start---')
@@ -79,7 +79,6 @@ def test_loss_and_right_rate_32():
     develop_right_rates_cps[1].append(tr_rr)
     print('[32x32] develop loss=%.5f,\t develop right rate=%.3f%%' %
           (tr_ll, tr_rr * 100))
-
 
 
 if __name__ == '__main__':

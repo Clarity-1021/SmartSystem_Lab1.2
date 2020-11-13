@@ -25,18 +25,27 @@ class CNN_network(nn.Module):
         # 第二个隐藏层
         self.layer2 = nn.Sequential(
             # 从第一个隐藏层到第二个隐藏层
-            nn.Conv2d(6, 16, kernel_size=5, stride=1, padding=2),
+            nn.Conv2d(6, 10, kernel_size=5, stride=1, padding=2),
+            nn.BatchNorm2d(10),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
+        # 第三个隐藏层
+        self.layer3 = nn.Sequential(
+            # 从第二个隐藏层到第三个隐藏层
+            nn.Conv2d(10, 16, kernel_size=5, stride=1, padding=2),
             nn.BatchNorm2d(16),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2)
         )
         # 从最后一个隐藏层到输出层的线性变化
-        self.fc = nn.Linear(1024, 12)
+        self.fc = nn.Linear(256, 12)
 
     def forward(self, x):
         out = self.layer1(x)
         # print(out.size())  # torch.Size([4, 6, 16, 16])
         out = self.layer2(out)
+        out = self.layer3(out)
         # print(out.size())  # torch.Size([4, 16, 8, 8])
         out = out.reshape(out.size(0), -1)
         # print(out.size())  # torch.Size([4, 28*28])

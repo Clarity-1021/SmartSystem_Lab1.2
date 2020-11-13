@@ -14,8 +14,8 @@ class CNN_network(nn.Module):
             # 从输入层到第一层隐藏层
             # input channels = 1 因为是灰度图，输入只有一维，”0“or"1"
             # output channels = 6 同时也是第二层的input channels数
-            nn.Conv2d(1, 6, kernel_size=5, stride=1, padding=2),
-            nn.BatchNorm2d(6),
+            nn.Conv2d(1, 16, kernel_size=5, stride=1, padding=2),
+            nn.BatchNorm2d(16),
             # 激活函数，等效为“max(features, 0)”，如果是正保持不变，小于"0"置0
             nn.ReLU(),
             # 池化，窗口大小为2x2，即从这四个值里挑一个最大的作为输出
@@ -23,20 +23,20 @@ class CNN_network(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2)
         )
         # 第二个隐藏层
-        self.layer2 = nn.Sequential(
-            # 从第一个隐藏层到第二个隐藏层
-            nn.Conv2d(6, 16, kernel_size=5, stride=1, padding=2),
-            nn.BatchNorm2d(16),
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2, stride=2)
-        )
+        # self.layer2 = nn.Sequential(
+        #     # 从第一个隐藏层到第二个隐藏层
+        #     nn.Conv2d(6, 16, kernel_size=5, stride=1, padding=2),
+        #     nn.BatchNorm2d(16),
+        #     nn.ReLU(),
+        #     nn.MaxPool2d(kernel_size=2, stride=2)
+        # )
         # 从最后一个隐藏层到输出层的线性变化
-        self.fc = nn.Linear(1024, 12)
+        self.fc = nn.Linear(4096, 12)
 
     def forward(self, x):
         out = self.layer1(x)
         # print(out.size())  # torch.Size([4, 6, 16, 16])
-        out = self.layer2(out)
+        # out = self.layer2(out)
         # print(out.size())  # torch.Size([4, 16, 8, 8])
         out = out.reshape(out.size(0), -1)
         # print(out.size())  # torch.Size([4, 28*28])

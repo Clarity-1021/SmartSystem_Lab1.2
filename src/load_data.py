@@ -5,8 +5,8 @@ from torch.utils.data import DataLoader
 
 
 my_transforms = transforms.Compose([transforms.Grayscale(),  # 转灰度图
-                                    # transforms.Resize((32, 32)),  # 重置图像分辨
-                                    # transforms.CenterCrop(32),  # 进行中心剪裁
+                                    transforms.Resize((32, 32)),  # 重置图像分辨
+                                    transforms.CenterCrop(32),  # 进行中心剪裁
                                     transforms.ToTensor()])  # 转为Tensor
 
 train_size = "600"  # 每个文字分类取的训练集的个数

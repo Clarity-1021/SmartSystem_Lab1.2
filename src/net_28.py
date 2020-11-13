@@ -31,7 +31,7 @@ class CNN_network(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2)
         )
         # 从最后一个隐藏层到输出层的线性变化
-        self.fc = nn.Linear(1024, 12)
+        self.fc = nn.Linear(28*28, 12)
 
     def forward(self, x):
         out = self.layer1(x)
