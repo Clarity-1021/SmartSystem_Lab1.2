@@ -1,7 +1,6 @@
 from src import CNN_network
-from src import net_28
 from src import load_data
-from src import load_data_28
+from src.compare import load_data_28, net_28
 import torch
 import torch.nn as nn
 import torch.optim as optim

@@ -1,0 +1,186 @@
+"D:\Program Files\Anaconda3\python.exe" D:/Wendy/学习/人工智能/Labs/Lab1.2/SmartSystem_Lab1.2/src/main.py
+---Data_got---
+---CNN_NET_Train_Start---
+epoch[ 1/10] batch[1200/7200]
+[train]	 loss=0.97245,	 right rate=73.000%
+[develop]	 loss=0.47572,	 right rate=87.083%
+epoch[ 1/10] batch[2400/7200]
+[train]	 loss=0.37705,	 right rate=89.250%
+[develop]	 loss=0.35994,	 right rate=90.833%
+epoch[ 1/10] batch[3600/7200]
+[train]	 loss=0.25617,	 right rate=92.000%
+[develop]	 loss=0.28298,	 right rate=92.083%
+epoch[ 1/10] batch[4800/7200]
+[train]	 loss=0.14722,	 right rate=95.750%
+[develop]	 loss=0.16397,	 right rate=95.833%
+epoch[ 1/10] batch[6000/7200]
+[train]	 loss=0.16888,	 right rate=95.000%
+[develop]	 loss=0.12814,	 right rate=96.667%
+epoch[ 1/10] batch[7200/7200]
+[train]	 loss=0.11611,	 right rate=96.750%
+[develop]	 loss=0.13436,	 right rate=96.250%
+epoch[ 2/10] batch[1200/7200]
+[train]	 loss=0.05802,	 right rate=98.667%
+[develop]	 loss=0.14687,	 right rate=96.250%
+epoch[ 2/10] batch[2400/7200]
+[train]	 loss=0.07124,	 right rate=97.417%
+[develop]	 loss=0.10981,	 right rate=98.333%
+epoch[ 2/10] batch[3600/7200]
+[train]	 loss=0.08077,	 right rate=97.583%
+[develop]	 loss=0.09798,	 right rate=98.333%
+epoch[ 2/10] batch[4800/7200]
+[train]	 loss=0.07439,	 right rate=97.750%
+[develop]	 loss=0.10769,	 right rate=97.083%
+epoch[ 2/10] batch[6000/7200]
+[train]	 loss=0.08666,	 right rate=97.667%
+[develop]	 loss=0.13126,	 right rate=96.250%
+epoch[ 2/10] batch[7200/7200]
+[train]	 loss=0.04112,	 right rate=98.667%
+[develop]	 loss=0.09846,	 right rate=97.083%
+epoch[ 3/10] batch[1200/7200]
+[train]	 loss=0.02407,	 right rate=99.583%
+[develop]	 loss=0.08231,	 right rate=97.917%
+epoch[ 3/10] batch[2400/7200]
+[train]	 loss=0.04070,	 right rate=98.917%
+[develop]	 loss=0.09614,	 right rate=97.917%
+epoch[ 3/10] batch[3600/7200]
+[train]	 loss=0.02275,	 right rate=99.583%
+[develop]	 loss=0.09430,	 right rate=97.500%
+epoch[ 3/10] batch[4800/7200]
+[train]	 loss=0.03333,	 right rate=98.917%
+[develop]	 loss=0.10704,	 right rate=97.917%
+epoch[ 3/10] batch[6000/7200]
+[train]	 loss=0.02941,	 right rate=99.083%
+[develop]	 loss=0.10011,	 right rate=97.500%
+epoch[ 3/10] batch[7200/7200]
+[train]	 loss=0.05953,	 right rate=98.167%
+[develop]	 loss=0.09088,	 right rate=98.333%
+epoch[ 4/10] batch[1200/7200]
+[train]	 loss=0.01244,	 right rate=99.583%
+[develop]	 loss=0.08740,	 right rate=98.333%
+epoch[ 4/10] batch[2400/7200]
+[train]	 loss=0.01205,	 right rate=99.667%
+[develop]	 loss=0.09028,	 right rate=98.333%
+epoch[ 4/10] batch[3600/7200]
+[train]	 loss=0.02720,	 right rate=99.500%
+[develop]	 loss=0.09791,	 right rate=97.917%
+epoch[ 4/10] batch[4800/7200]
+[train]	 loss=0.01872,	 right rate=99.583%
+[develop]	 loss=0.08325,	 right rate=98.333%
+epoch[ 4/10] batch[6000/7200]
+[train]	 loss=0.02105,	 right rate=99.417%
+[develop]	 loss=0.07641,	 right rate=99.167%
+epoch[ 4/10] batch[7200/7200]
+[train]	 loss=0.01699,	 right rate=99.250%
+[develop]	 loss=0.09430,	 right rate=98.333%
+epoch[ 5/10] batch[1200/7200]
+[train]	 loss=0.00426,	 right rate=99.917%
+[develop]	 loss=0.09661,	 right rate=98.333%
+epoch[ 5/10] batch[2400/7200]
+[train]	 loss=0.00454,	 right rate=99.833%
+[develop]	 loss=0.08434,	 right rate=98.750%
+epoch[ 5/10] batch[3600/7200]
+[train]	 loss=0.00619,	 right rate=99.833%
+[develop]	 loss=0.07114,	 right rate=98.333%
+epoch[ 5/10] batch[4800/7200]
+[train]	 loss=0.00618,	 right rate=99.917%
+[develop]	 loss=0.09085,	 right rate=98.750%
+epoch[ 5/10] batch[6000/7200]
+[train]	 loss=0.00665,	 right rate=99.833%
+[develop]	 loss=0.15119,	 right rate=97.083%
+epoch[ 5/10] batch[7200/7200]
+[train]	 loss=0.02497,	 right rate=99.667%
+[develop]	 loss=0.14041,	 right rate=97.500%
+epoch[ 6/10] batch[1200/7200]
+[train]	 loss=0.00222,	 right rate=99.917%
+[develop]	 loss=0.12244,	 right rate=97.917%
+epoch[ 6/10] batch[2400/7200]
+[train]	 loss=0.00314,	 right rate=99.917%
+[develop]	 loss=0.11879,	 right rate=97.500%
+epoch[ 6/10] batch[3600/7200]
+[train]	 loss=0.00746,	 right rate=99.833%
+[develop]	 loss=0.11179,	 right rate=98.333%
+epoch[ 6/10] batch[4800/7200]
+[train]	 loss=0.00957,	 right rate=99.583%
+[develop]	 loss=0.12026,	 right rate=98.333%
+epoch[ 6/10] batch[6000/7200]
+[train]	 loss=0.01214,	 right rate=99.833%
+[develop]	 loss=0.17158,	 right rate=97.083%
+epoch[ 6/10] batch[7200/7200]
+[train]	 loss=0.00411,	 right rate=99.917%
+[develop]	 loss=0.11989,	 right rate=98.333%
+epoch[ 7/10] batch[1200/7200]
+[train]	 loss=0.00103,	 right rate=100.000%
+[develop]	 loss=0.14562,	 right rate=97.500%
+epoch[ 7/10] batch[2400/7200]
+[train]	 loss=0.00277,	 right rate=99.917%
+[develop]	 loss=0.12598,	 right rate=97.917%
+epoch[ 7/10] batch[3600/7200]
+[train]	 loss=0.00102,	 right rate=100.000%
+[develop]	 loss=0.13147,	 right rate=98.333%
+epoch[ 7/10] batch[4800/7200]
+[train]	 loss=0.00599,	 right rate=99.667%
+[develop]	 loss=0.13664,	 right rate=98.333%
+epoch[ 7/10] batch[6000/7200]
+[train]	 loss=0.00573,	 right rate=99.833%
+[develop]	 loss=0.11110,	 right rate=97.917%
+epoch[ 7/10] batch[7200/7200]
+[train]	 loss=0.00372,	 right rate=99.833%
+[develop]	 loss=0.13706,	 right rate=98.333%
+epoch[ 8/10] batch[1200/7200]
+[train]	 loss=0.00234,	 right rate=99.917%
+[develop]	 loss=0.09566,	 right rate=98.333%
+epoch[ 8/10] batch[2400/7200]
+[train]	 loss=0.00170,	 right rate=99.917%
+[develop]	 loss=0.14491,	 right rate=97.917%
+epoch[ 8/10] batch[3600/7200]
+[train]	 loss=0.00112,	 right rate=100.000%
+[develop]	 loss=0.14729,	 right rate=97.500%
+epoch[ 8/10] batch[4800/7200]
+[train]	 loss=0.00109,	 right rate=100.000%
+[develop]	 loss=0.11557,	 right rate=97.083%
+epoch[ 8/10] batch[6000/7200]
+[train]	 loss=0.00164,	 right rate=100.000%
+[develop]	 loss=0.11415,	 right rate=98.333%
+epoch[ 8/10] batch[7200/7200]
+[train]	 loss=0.00378,	 right rate=99.750%
+[develop]	 loss=0.12532,	 right rate=98.333%
+epoch[ 9/10] batch[1200/7200]
+[train]	 loss=0.00193,	 right rate=99.917%
+[develop]	 loss=0.12451,	 right rate=97.917%
+epoch[ 9/10] batch[2400/7200]
+[train]	 loss=0.00255,	 right rate=99.833%
+[develop]	 loss=0.08731,	 right rate=98.333%
+epoch[ 9/10] batch[3600/7200]
+[train]	 loss=0.00260,	 right rate=99.917%
+[develop]	 loss=0.13692,	 right rate=97.917%
+epoch[ 9/10] batch[4800/7200]
+[train]	 loss=0.00062,	 right rate=100.000%
+[develop]	 loss=0.09862,	 right rate=98.333%
+epoch[ 9/10] batch[6000/7200]
+[train]	 loss=0.00029,	 right rate=100.000%
+[develop]	 loss=0.11861,	 right rate=97.500%
+epoch[ 9/10] batch[7200/7200]
+[train]	 loss=0.00057,	 right rate=100.000%
+[develop]	 loss=0.15187,	 right rate=97.500%
+epoch[10/10] batch[1200/7200]
+[train]	 loss=0.00074,	 right rate=100.000%
+[develop]	 loss=0.13438,	 right rate=97.917%
+epoch[10/10] batch[2400/7200]
+[train]	 loss=0.00016,	 right rate=100.000%
+[develop]	 loss=0.13844,	 right rate=97.917%
+epoch[10/10] batch[3600/7200]
+[train]	 loss=0.00050,	 right rate=100.000%
+[develop]	 loss=0.13741,	 right rate=97.083%
+epoch[10/10] batch[4800/7200]
+[train]	 loss=0.00033,	 right rate=100.000%
+[develop]	 loss=0.11760,	 right rate=98.333%
+epoch[10/10] batch[6000/7200]
+[train]	 loss=0.00192,	 right rate=99.833%
+[develop]	 loss=0.11990,	 right rate=97.917%
+epoch[10/10] batch[7200/7200]
+[train]	 loss=0.00193,	 right rate=99.917%
+[develop]	 loss=0.16746,	 right rate=97.917%
+---CNN_NET_Train_Finished---
+
+Process finished with exit code 0

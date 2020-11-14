@@ -1,7 +1,5 @@
 from src import CNN_network
-from src import net_without_normal
-from src import net_nor_1
-from src import net_nor_2
+from src.compare import net_hidden_1_16, net_hidden_1_6_2_16_3_32, net_hidden_1_6_2_10_3_16, net_hidden_1_6
 from src import load_data
 import torch
 import torch.nn as nn
@@ -18,20 +16,22 @@ epoch_count = 10  # 指定的最大epoch数
 my_learning_rate = 0.01  # 学习率
 
 # train
-lals = ['batch_normalized', 'batch_normalized_1', 'batch_normalized_2', 'batch_without_normal']
+lals = ['1x6-2x16', '1x6', '1x16', '1x6-2x10-3x16', '1x6-2x16-3x32']
 # 用相同的optimiser训练网络，配合不同的损失函数
 
-net_normal = CNN_network.CNN_network()
-net_normal_1 = net_nor_1.CNN_network()
-net_normal_2 = net_nor_2.CNN_network()
-net_without_normal = net_without_normal.CNN_network()
-nets = [net_normal, net_normal_1, net_normal_2, net_without_normal]
+net_hidden_1_6_2_16 = CNN_network.CNN_network()
+net_hidden_1_6 = net_hidden_1_6.CNN_network()
+net_hidden_1_16 = net_hidden_1_16.CNN_network()
+net_hidden_1_6_2_10_3_16 = net_hidden_1_6_2_10_3_16.CNN_network()
+net_hidden_1_6_2_16_3_32 = net_hidden_1_6_2_16_3_32.CNN_network()
+nets = [net_hidden_1_6_2_16, net_hidden_1_6, net_hidden_1_16, net_hidden_1_6_2_10_3_16, net_hidden_1_6_2_16_3_32]
 
-opt_normal = optim.Adamax(net_normal.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
-opt_normal_1 = optim.Adamax(net_normal_1.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
-opt_normal_2 = optim.Adamax(net_normal_2.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
-opt_without_normal = optim.Adamax(net_without_normal.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
-opts = [opt_normal, opt_normal_1, opt_normal_2, opt_without_normal]
+opt_hidden_1_6_2_16 = optim.Adamax(net_hidden_1_6_2_16.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_hidden_1_6 = optim.Adamax(net_hidden_1_6.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_hidden_1_16 = optim.Adamax(net_hidden_1_16.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_hidden_1_6_2_10_3_16 = optim.Adamax(net_hidden_1_6_2_10_3_16.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opt_hidden_1_6_2_16_3_32 = optim.Adamax(net_hidden_1_6_2_16_3_32.parameters(),lr=my_learning_rate,betas=(0.9, 0.999),eps=1e-08,weight_decay=0)
+opts = [opt_hidden_1_6_2_16, opt_hidden_1_6, opt_hidden_1_16, opt_hidden_1_6_2_10_3_16, opt_hidden_1_6_2_16_3_32]
 
 criterion = nn.CrossEntropyLoss()
 
@@ -41,14 +41,14 @@ develop_loader, develop_sample_size, develop_batch_size = load_data.load_develop
 print('---Data_got---')
 print('---CNN_NET_Train_Start---')
 
-train_losses_cps = [[], [], [], []]  # 训练集的loss
-train_right_rates_cps = [[], [], [], []]  # 正确率
-develop_losses_cps = [[], [], [], []]  # 训练集的loss
-develop_right_rates_cps = [[], [], [], []]
+train_losses_cps = [[], [], [], [], []]  # 训练集的loss
+train_right_rates_cps = [[], [], [], [], []]  # 正确率
+develop_losses_cps = [[], [], [], [], []]  # 训练集的loss
+develop_right_rates_cps = [[], [], [], [], []]
 
 def test_loss_and_right_rate():
-    test_loss = [[0.0], [0.0], [0.0], [0.0]]  # 总loss
-    test_right_count = [[0], [0], [0], [0]]  # 总正确个数
+    test_loss = [[0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
+    test_right_count = [[0], [0], [0], [0], [0]]  # 总正确个数
     for data in develop_loader:
         inputs, labels = data
         for net, tr_l, tr_r in zip(nets, test_loss, test_right_count):
@@ -70,8 +70,8 @@ def test_loss_and_right_rate():
 
 if __name__ == '__main__':
     for epoch in range(epoch_count):
-        train_loss = [[0.0], [0.0], [0.0], [0.0]]  # 总loss
-        train_right_count = [[0], [0], [0], [0]]  # 总正确个数
+        train_loss = [[0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
+        train_right_count = [[0], [0], [0], [0], [0]]  # 总正确个数
         for batch_index, data in enumerate(train_loader):
             inputs, labels = data
             for net, optimizer, tr_l, tr_r in zip(
@@ -94,8 +94,8 @@ if __name__ == '__main__':
                     train_right_rates.append(tr_rr)
                     print('[' + optm + '] train loss=%.5f,\t train right rate=%.3f%%' %
                           (tr_ll, tr_rr * 100))
-                train_loss = [[0.0], [0.0], [0.0], [0.0]]  # 总loss
-                train_right_count = [[0], [0], [0], [0]]  # 总正确个数
+                train_loss = [[0.0], [0.0], [0.0], [0.0], [0.0]]  # 总loss
+                train_right_count = [[0], [0], [0], [0], [0]]  # 总正确个数
                 test_loss_and_right_rate()
 
 print('---CNN_NET_Train_Finished---')
@@ -131,6 +131,8 @@ plt.legend(loc='best')
 plt.xlabel('epoch')
 plt.ylabel('right rate')
 plt.show()
+
+
 
 
 

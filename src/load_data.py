@@ -18,11 +18,11 @@ train_batch_size = 1  # 训练集的batch_size
 
 # develop_set_prams
 develop_set_path = r"../data/" + train_size + "/develop"  # 开发集样本的文件夹
-develop_batch_size = 20  # 开发集的batch_size
+develop_batch_size = 1  # 开发集的batch_size
 
 # test_set_prams
 test_set_path = develop_set_path  # 测试集样本的文件夹
-test_batch_size = 20  # 测试集的batch_size
+test_batch_size = 1  # 测试集的batch_size
 
 
 def load_train_set():

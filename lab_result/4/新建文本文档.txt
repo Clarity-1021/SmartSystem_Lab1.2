@@ -1,0 +1,63 @@
+"D:\Program Files\Anaconda3\python.exe" D:/Wendy/学习/人工智能/Labs/Lab1.2/SmartSystem_Lab1.2/src/main.py
+---Data_got---
+---CNN_NET_Train_Start---
+epoch[ 1/10] batch[2400/7200]
+[train]	 loss=0.65052,	 right rate=82.542%
+[develop]	 loss=0.26471,	 right rate=93.333%
+epoch[ 1/10] batch[4800/7200]
+[train]	 loss=0.17891,	 right rate=95.000%
+[develop]	 loss=0.21199,	 right rate=95.833%
+epoch[ 1/10] batch[7200/7200]
+[train]	 loss=0.10578,	 right rate=96.833%
+[develop]	 loss=0.23287,	 right rate=94.583%
+epoch[ 2/10] batch[2400/7200]
+[train]	 loss=0.06459,	 right rate=98.542%
+[develop]	 loss=0.12876,	 right rate=97.500%
+epoch[ 2/10] batch[4800/7200]
+[train]	 loss=0.07253,	 right rate=97.833%
+[develop]	 loss=0.15003,	 right rate=96.667%
+epoch[ 2/10] batch[7200/7200]
+[train]	 loss=0.05515,	 right rate=98.417%
+[develop]	 loss=0.18925,	 right rate=96.250%
+epoch[ 3/10] batch[2400/7200]
+[train]	 loss=0.03575,	 right rate=99.125%
+[develop]	 loss=0.15182,	 right rate=97.083%
+epoch[ 3/10] batch[4800/7200]
+[train]	 loss=0.03059,	 right rate=99.083%
+[develop]	 loss=0.19004,	 right rate=96.250%
+epoch[ 3/10] batch[7200/7200]
+[train]	 loss=0.03053,	 right rate=99.167%
+[develop]	 loss=0.14019,	 right rate=97.500%
+epoch[ 4/10] batch[2400/7200]
+[train]	 loss=0.01750,	 right rate=99.500%
+[develop]	 loss=0.16700,	 right rate=96.667%
+epoch[ 4/10] batch[4800/7200]
+[train]	 loss=0.01199,	 right rate=99.625%
+[develop]	 loss=0.16017,	 right rate=97.500%
+epoch[ 4/10] batch[7200/7200]
+[train]	 loss=0.02508,	 right rate=99.250%
+[develop]	 loss=0.17933,	 right rate=97.083%
+epoch[ 5/10] batch[2400/7200]
+[train]	 loss=0.00850,	 right rate=99.792%
+[develop]	 loss=0.17243,	 right rate=97.917%
+epoch[ 5/10] batch[4800/7200]
+[train]	 loss=0.00953,	 right rate=99.792%
+[develop]	 loss=0.18420,	 right rate=97.083%
+epoch[ 5/10] batch[7200/7200]
+[train]	 loss=0.01081,	 right rate=99.583%
+[develop]	 loss=0.20826,	 right rate=97.083%
+epoch[ 6/10] batch[2400/7200]
+[train]	 loss=0.00460,	 right rate=99.833%
+[develop]	 loss=0.17711,	 right rate=97.500%
+epoch[ 6/10] batch[4800/7200]
+[train]	 loss=0.01154,	 right rate=99.583%
+[develop]	 loss=0.18013,	 right rate=97.083%
+epoch[ 6/10] batch[7200/7200]
+[train]	 loss=0.00633,	 right rate=99.833%
+[develop]	 loss=0.15941,	 right rate=98.333%
+epoch[ 7/10] batch[2400/7200]
+[train]	 loss=0.00074,	 right rate=100.000%
+[develop]	 loss=0.18243,	 right rate=97.500%
+---CNN_NET_Train_Finished---
+
+Process finished with exit code 0
